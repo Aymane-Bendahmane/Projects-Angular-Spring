@@ -1,0 +1,87 @@
+<h1>{{title}}</h1>
+<div class="row" *ngIf="Products">
+
+  <div *ngFor="let pr of Products._embedded.products" class="col-md-4 ">
+
+    <div class="card p-3" style="width: 18rem;">
+      <img (click)="onGetDetails(pr)" class="card-img-top" src="{{this.ps.host+'/photoProduct/'+pr.id+'?ts='+getTS()}}"
+           alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{pr.name}}</h5>
+
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li *ngIf="auth.isAdmin()" class="list-group-item">
+          <div>
+            <button class="btn btn-warning" (click)="onEdite(pr)">
+              Edite IMG
+            </button>
+            <p *ngIf="editphoto && currentProduct==pr">
+              <input type="file" (change)="onSelectedFile($event)">
+              <button class="btn btn-success" (click)="uploadPhoto()">Upload {{progress}}</button>
+            </p>
+          </div>
+        </li>
+        <li class="list-group-item">
+          {{pr.description}}
+        </li>
+        <li class="list-group-item">
+          {{pr.current_price|number:'0.2'}}
+        </li>
+        <li class="list-group-item">
+          <form [formGroup]="quantityForm" (ngSubmit)="onSubmit(pr)">
+            <label>
+              Quantity:
+              <input type="number" formControlName="quantity" ngModel [(ngModel)]="pr.quantity">
+            </label>
+            <button type="submit" class="btn btn-success" [disabled]="!quantityForm.valid">Submit</button>
+
+          </form>
+        </li>
+      </ul>
+
+
+    </div>
+
+    <!--
+    <div class="card m-1">
+      <div class=" card-header">{{pr.name}}</div>
+      <div class="card-body">
+        <table>
+          <tr>
+            <td>
+              <img src="{{this.ps.host+'/photoProduct/'+pr.id+'?ts='+getTS()}}" width="100%"/>
+              <div *ngIf="auth.isAdmin()">
+                <button class="btn btn-warning" (click)="onEdite(pr)">
+                  Edite IMG
+                </button>
+                <p *ngIf="editphoto && currentProduct==pr">
+                  <input type="file" (change)="onSelectedFile($event)">
+                  <button class="btn btn-success" (click)="uploadPhoto()">Upload {{progress}}</button>
+                </p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              {{pr.current_price|number:'0.2'}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{pr.description}}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+    -->
+  </div>
+
+
+</div>
+
+

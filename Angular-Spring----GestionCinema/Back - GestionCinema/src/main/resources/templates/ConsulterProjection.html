@@ -1,0 +1,74 @@
+<!DOCTYPE>
+<HTML xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout.html"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+
+</head>
+<body>
+<section layout:fragment="pagecontent">
+    <div class="container mt-5">
+        <div class="cards">
+
+            <div class="card-header" >List des Projections</div>
+            <div class="card-body">
+                <div class="col text-left" style="margin-bottom: 10px;">
+                    <a type="button" class="btn btn-success " sec:authorize="hasRole('ROLE_ADMIN')"
+                       th:href="@{/AjouterProjection}" >Ajouter</a>
+                </div>
+
+                <table class="table">
+
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Date projection</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">film</th>
+                        <th scope="col">salle</th>
+                        <th scope="col">seance</th>
+                        <th scope="col">Tickets</th>
+                        <th scope="col">Supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="p:${projections}">
+                        <td th:text="${p.id}"></td>
+                        <td th:text="${p.dateProjection}"></td>
+                        <td th:text="${p.prix}"></td>
+                        <td th:text="${p.film.titre}"></td>
+                        <td th:text="${p.salle.name}"></td>
+                        <td th:text="${p.seance.getHeureDebut()}">
+                        <td >   <a th:href="@{/AfficherTickets(id=${p.getId()})}"> Tickets </a>    </td>
+                        <td >   <a th:href="@{/SupprimerProjection(id=${p.id},page=${currentPage.number})}">Supprimer</a></td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+                <!-- The Modal -->
+
+
+            </div>
+            <div class="card-footer container ">
+                <nav aria-label="Page navigation example" class="table-responsive mb-2">
+                    <ul class="pagination mb-0">
+
+                        <li  th:each="page,status:${pages}"
+                            th:class="${status.index==currentPage.number} ? 'page-item ACTIVE' : 'page-item '">
+                            <a class="page-link" th:href="@{ConsulterProjection(page=${status.index})}"
+                               th:text="${status.index}"></a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</HTML>

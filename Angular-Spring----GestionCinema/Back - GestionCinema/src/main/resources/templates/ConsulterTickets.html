@@ -1,0 +1,38 @@
+<!DOCTYPE>
+<HTML xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout.html"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+
+</head>
+<body>
+<section layout:fragment="pagecontent">
+
+    <div class=" container mt-3">
+
+        <div class="row">
+
+            <div class="card col-sm-4 col-md-3  col-lg-2 h-25 m-1 ml-auto mr-auto" th:each="t:${tickets}" style="background-color: #ffed3e">
+                <div class="card-header" >
+                    <h1>Ticket</h1>
+                </div>
+                <div class="card-body">
+                    <label ><strong>Prix :</strong></label>
+                    <label th:text="${t.prix}"> </label><br>
+                    <label ><strong>Salle :</strong></label>
+                    <label th:text="${t.getProjection().salle.name}"></label><br>
+                    <label ><strong>Film :</strong></label>
+                    <label th:text="${t.getProjection().film.titre}"></label><br>
+                    <label ><strong>Date  :</strong></label>
+                    <label th:text="${t.getProjection().getDateProjection()}"></label><br>
+                    <label ><strong>Seance  :</strong></label>
+                    <label th:text="${t.getProjection().seance.getHeureDebut()}"></label><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</HTML>

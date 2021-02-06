@@ -1,0 +1,91 @@
+<div class=" m-3">
+  <div class="row">
+    <div class="col-md-3">
+      <ul *ngIf="villes" class="list-group">
+        <li [ngClass]="v==currentVille?'active':''" *ngFor="let v of villes._embedded.villes" class="list-group-item"
+            (click)="onGetCinema(v)">
+          {{v.name}}
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">
+          Listes des cinemas
+        </div>
+        <div class="card-body">
+
+          <ul *ngIf="cinemas" class="list-group list-group-horizontal ">
+            <li class="list-group-item" [ngClass]="c==currentCinema?'active':''"
+                *ngFor="let c of cinemas._embedded.cinemas" (click)="onGetSalle(c)">
+
+              {{c.name}}
+
+            </li>
+
+          </ul>
+          <div class="container">
+            <div class="row" *ngIf="salles">
+
+              <div *ngFor="let s of salles._embedded.salles" class="col-md-6 mt-3 mb-3">
+
+                <div class="card ">
+                  <div class="card-header">{{s.name}}</div>
+                  <div class="card-body" *ngIf="s.projection">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <img height="100%" width="100%"
+                             src='{{cinemaservice.host+"/imageFilm/"+s.projection._embedded.projections[0].film.id}}'>
+
+                      </div>
+                      <div class="col-md-7">
+                        <ul class="list-group  clickable" >
+                          <li class="list-group-item">Seances :</li>
+                          <li class="list-group-item" [ngClass]="p==currentProjection?'active':''" *ngFor="let p of s.projection._embedded.projections"
+                              (click)="onGetTickets(p)">
+
+                            {{p.seance.heureDebut | date:'HH:mm'}}Am - Prix {{p.prix | number : '0.00'}}DH
+
+                          </li>
+
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="tickets">
+                      <hr>
+                      <div *ngIf="currentProjection.salle.id==s.id">
+                        <button (click)="onSelectTicket(t)" class="{{getclass(t)}}"  [disabled]="t.reserve"   *ngFor="let t of tickets._embedded.tickets">
+                          {{t.place.numero}}
+                        </button>
+                        <div *ngIf="listTicket.length>0">
+                        <form #f="ngForm" (ngSubmit)="onPayTickets(f.value)">
+                          <div class="form-group">
+                            <label >Nom:</label>
+                            <input type="text" class="form-control"  name="nom" ngModel>
+                          </div>
+                          <div class="form-group">
+                            <label >Code payemant:</label>
+                            <input type="text" class="form-control" name="code" ngModel>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

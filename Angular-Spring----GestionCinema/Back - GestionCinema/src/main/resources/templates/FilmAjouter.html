@@ -1,0 +1,57 @@
+<!DOCTYPE>
+<HTML xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout.html"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+
+</head>
+<body>
+<section layout:fragment="pagecontent">
+    <div class="card shadow m-auto w-50">
+        <div class="card-header">
+            <h1>Ajouter Film</h1>
+        </div>
+        <div class="card-body">
+            <form action="#" th:action="@{/SaveFilm}" th:object="${film}" method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label >Date de Sortie</label>
+                    <input type="date" class="form-control" th:field="*{dateSortie}" placeholder="Date de Sortie">
+                </div>
+
+                <div class="form-group" >
+                    <label >Description</label>
+                    <input type="text" class="form-control" th:field="*{description}" placeholder="Description">
+                </div>
+
+                <div class="form-group">
+                    <label >Duree</label>
+                    <input type="text" class="form-control" th:field="*{duree}" placeholder="Duree">
+                </div>
+
+                <div class="form-group">
+                    <label >Réalisateur</label>
+                    <input type="text" class="form-control" th:field="*{realisateur}" placeholder="Réalisateur">
+                </div>
+                <div class="form-group">
+                    <label >Titre</label>
+                    <input type="text" class="form-control" th:field="*{titre}" placeholder="Titre">
+                </div>
+                <div class="form-group">
+                    <label>Select Image</label>
+                    <input type="file" name="file" class="form-control-file">
+                </div>
+                <div class="form-group">
+                <select class="form-control" th:field="*{categorie.id}">
+                    <option th:each="c:${categories}" th:value="${c.id}"  th:text="${c.name}"></option>
+                </select>
+                </div>
+                <button type="submit" name="submit" class="btn " >Enregistrer </button>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</HTML>

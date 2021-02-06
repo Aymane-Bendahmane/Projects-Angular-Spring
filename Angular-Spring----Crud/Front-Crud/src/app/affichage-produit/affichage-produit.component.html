@@ -1,0 +1,44 @@
+<div class="container">
+
+  <div class="card mt-5">
+    <div class="card card-header bg-info">
+      <h2>Products</h2>
+      <form class="d-flex" #f="ngForm" (ngSubmit)="onSearch(f.value)">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" ngModel name="keyword">
+        <button class="btn btn-warning" type="submit">Search</button>
+      </form>
+    </div>
+
+    <div class="card card-body">
+      <table class="table  table-bordered ">
+        <thead>
+        <tr>
+          <th scope="col">name</th>
+          <th scope="col">prix</th>
+          <th scope="col">categorie</th>
+          <th scope="col">modifier</th>
+          <th scope="col">supprimer</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="produits">
+        <tr  *ngFor="let p of produits._embedded.produits">
+          <td>{{p.name}}</td>
+          <td>{{p.prix | number : '0.0'}}</td>
+          <td *ngIf="p.categorie.type" >{{p.categorie.type}}</td>
+          <td><button class="btn btn-warning" (click)="modifierProduit(p)"  >update</button></td>
+          <td ><button class="btn btn-danger" (click)="supprimerProduit(p)" >Delete</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <nav class="mt-2">
+    <ul class="pagination ">
+      <li *ngFor="let i of pages ; let y = index" class="page-item clickable" [ngClass]="y == currentPage ? 'active':''">
+        <a class="page-link" (click)="onPage(y)" > {{y}}</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+

@@ -1,0 +1,87 @@
+<div *ngIf="currentProduct">
+
+  <div class="card m-1" *ngIf="mode == false">
+    <div>
+      <h5 class="card-title mx-auto">{{currentProduct.name}}</h5>
+      <button *ngIf="auth.isAdmin()" class="btn btn-warning float-right" (click)="changeMode()">
+        Modify
+      </button>
+    </div>
+    <div class="row ">
+      <div class="col-md-4">
+        <img src="{{this.ps.host+'/photoProduct/'+currentProduct.id+'?ts='+getTS()}}"
+             alt="Card image cap">
+      </div>
+
+
+      <div class="col-md-8">
+        <ul class="list-group list-group-flush">
+          <li *ngIf="auth.isAdmin()" class="list-group-item">
+            <div>
+              <button class="btn btn-warning" (click)="onEdite(currentProduct)">
+                Edite IMG
+              </button>
+              <p *ngIf="editphoto ">
+                <input type="file" (change)="onSelectedFile($event)">
+                <button class="btn btn-success" (click)="uploadPhoto()">Upload {{progress}}</button>
+              </p>
+            </div>
+          </li>
+          <li class="list-group-item">
+            {{currentProduct.description}}
+          </li>
+          <li class="list-group-item">
+            {{currentProduct.current_price|number:'0.2'}}
+          </li>
+          <li class="list-group-item">
+            <form [formGroup]="quantityForm" (ngSubmit)="onSubmit()">
+              <label>
+                Quantity:
+                <input type="number" formControlName="quantity">
+              </label>
+              <button type="submit" class="btn btn-success" [disabled]="!quantityForm.valid">Submit</button>
+
+            </form>
+          </li>
+        </ul>
+      </div>
+
+
+    </div>
+
+  </div>
+  <div *ngIf="mode == true"  >
+    <form #f="ngForm" (ngSubmit)="onModifyProduct(f.value)">
+      <div class="form-group">
+        <label for="control-label">Name : </label>
+        <input type="text" class="form-control" name="name" ngModel [(ngModel)]="currentProduct.name">
+      </div>
+      <div class="form-group">
+        <label for="control-label">Description : </label>
+        <input type="text" class="form-control" name="description" ngModel [(ngModel)]="currentProduct.description">
+      </div>
+      <div class="form-group">
+        <label for="control-label">Current_price : </label>
+        <input type="text" class="form-control" name="current_price" ngModel [(ngModel)]="currentProduct.current_price">
+      </div>
+
+      <div class="form-group">
+        <label for="control-label">promotion : </label>
+        <input type="checkbox" class="form-control" name="promotion" ngModel [(ngModel)]="currentProduct.promotion">
+      </div>
+      <div class="form-group">
+        <label for="control-label">available : </label>
+        <input type="checkbox" class="form-control" name="available" ngModel [(ngModel)]="currentProduct.available">
+      </div>
+      <div class="form-group">
+        <label for="control-label">selected : </label>
+        <input type="checkbox" class="form-control" name="selected" ngModel [(ngModel)]="currentProduct.selected">
+      </div>
+
+      <button class="btn btn-success" type="submit">
+        Update
+      </button>
+    </form>
+  </div>
+
+</div>

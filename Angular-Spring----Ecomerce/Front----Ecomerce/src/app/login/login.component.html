@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-title bg-success">Authentication</div>
+  <div class="card-body">
+    <form [formGroup]="profileFrom" (ngSubmit)="onSubmit()">
+      <label>
+        First Name:
+        <input type="text" formControlName="login">
+      </label>
+
+      <label>
+        Last Name:
+        <input type="password" formControlName="password">
+      </label>
+      <button type="submit" class="btn btn-success" [disabled]="!profileFrom.valid">Submit</button>
+
+    </form>
+  </div>
+</div>

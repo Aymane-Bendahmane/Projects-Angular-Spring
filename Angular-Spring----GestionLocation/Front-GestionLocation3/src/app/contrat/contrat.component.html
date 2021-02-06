@@ -1,0 +1,271 @@
+<div class="container" >
+  <div *ngIf="!generated">
+    <!--
+        <button class="btn btn-success btn-block" (click)="openPDF()">Open PDF</button>
+    -->
+    <button (click)="onGenerated()" class="btn btn-success mt-2" ngxPrint
+            printSectionId="contrat"
+            [useExistingCss]="true"
+            printTitle="Bail"
+    >
+      Generate
+    </button>
+    <div class="contrat" id="contrat">
+      <h1>Contrat de location de logement
+      </h1>
+      <hr>
+      <p>
+        Ce Contrat de location ("Bail") est fait et effectif ce {{currentAffectation.date_aff | date:'short'}},
+        par et entre {{currentLocataire.nom + ' ' + currentLocataire.prenom}}, resident
+        {{currentLocataire.adresse}} et group HNFS , resident au maroc .
+      </p>
+      <h2>
+        1. PREMISES
+      </h2>
+      <p>
+        Le proprietaire loue au locataire qui accepte le bien dans son état actuel la maison ce situant à l'adresse
+        suivante: {{currentBien.adresse}}
+      </p>
+      <h2>
+        2. DURÉE
+      </h2>
+      <p>
+        La durée de ce bail commence le {{currentAffectation.date_aff | date:'short'}} , et finit
+        le {{currentAffectation.date_fin_aff | date:'short'}} .
+        Si le propriétaire est incapable de fournir à la maison la
+        date exacte. il est tenu de la fournir le plus tôt possible et le loyer payé par le locataire sera réduit en
+        prenant en compte la période d’indisponibilité. Le locataire n'a droit à aucun autre recours en cas de
+        retard dans la fourniture de la maison.
+      </p>
+      <h2>
+        3. LOYER
+      </h2>
+      <p>
+        Le locataire s'engage à payer au propriétaire, sans avoir à le demander, à titre de loyer pour la maison
+        la somme de {{currentBien.prix  }} plus syndic {{currentBien.prix_syndic}} , les
+        taxes {{currentBien.prix_taxes}},
+        par mois en avance le premier jour de chaque mois caledar civil.
+      </p>
+      <h2>
+        4. CAUTION
+      </h2>
+      <p>
+        À la signature du bail, le locataire dépose auprès du propriétaire {{currentBien.prix + 3000}}, à titre de
+        garantie
+        pour l'exécution par le locataire des conditions du présent contrat de
+        location et qui seront rendus au locataire, sans intérêt, à la fin de ce contrat de location. En cas de
+        dommages à la maison causés par la famille du locataire ou du locataire, des agents ou des visiteurs, le
+        propriétaire peut utiliser les fonds de la caution pour réparer, mais n'est pas limité à ces fonds et le
+        locataire reste responsable.
+      </p>
+      <h2>
+        5. JOUISSANCE PAISIBLE
+      </h2>
+      <p>
+        Le propriétaire convient que si le locataire paie en temps voulu le loyer et s'acquitte des autres
+        obligations prévues par le présent bail, il ne s'immiscera pas dans l'utilisation et la jouissance de la
+        maison par le locataire.
+      </p>
+      <h2>
+        6. ENTRETIEN ET RÉPARATION
+      </h2>
+      <p>
+        A: Le locataire, à ses propres frais, maintiendra et entretiendra la maison ainsi que tous les
+        équipements et accessoires en bon état et fera les réparations nécessaires pendant la durée du présent
+        bail. En particulier, le locataire veillera au bon fonctionnement des appareils de la maison; garder la
+        chaudière en bon état; et gardez les allées exemptes de saleté et de débris. Le Locataire doit, à ses
+        frais, effectuer toutes les réparations nécessaires sur la plomberie, la cuisinière, les appareils de
+        chauffage, les appareils électriques et au gaz, les autres dispositifs et systèmes mécaniques, les sols,
+        les plafonds et les murs quand le dommage est dû à la mauvaise utilisation, ou négligence du
+        Locataire, ou de sa famille, ou d’un visiteur..
+        B: Le locataire s'engage à ne pas placer des enseignes ni de peinture sur la maison ou à
+        proximité de celui-ci sans le consentement écrit préalable du locateur.
+        C: Le locataire s'engage à informer sans délai le propriétaire en cas de dommage, de mal
+        fonctionnement de la maison, ou en cas de défaillance de ses appareils ou systèmes mécaniques, et à
+        l'exception des réparations ou des remplacements à la charge du locataire en vertu de la sous-section A
+        ci-dessus, Le propriétaire doit faire de son mieux pour réparer ou remplacer les pièces, appareils ou
+        systèmes mécaniques endommagés ou défectueux.
+
+      </p>
+      <h2>
+        7. ANIMAUX
+      </h2>
+      <p>
+        Le locataire ne doit garder aucun animal domestique ou autre dans ou autour de la maison sans le
+        consentement écrit préalable du propriétaire.
+
+      </p>
+      <h2>
+        8. DROIT D'INSPECTION
+      </h2>
+      <p>
+        Le locateur et ses mandataires ont le droit, à tout moment raisonnable pendant la durée du présent bail
+        et de tout renouvellement de celui-ci, d’entrer dans la maison à des fins d'inspection des lieux et / ou
+        des réparations ou de tout autre élément requis par ce bail.
+
+      </p>
+      <h2>
+        9. AFFICHAGE
+      </h2>
+      <p>
+        Au cours des trente (30) derniers jours du présent bail, le propriétaire ou son mandataire peut afficher
+        «à vendre» ou «à louer» ou des panneaux similaires sur ou autour de la maison et entrer pour faire
+        visiter la maison aux acheteurs ou locataires potentiels.
+
+      </p>
+      <h2>
+        10. TITULAIRE DU LOCATAIRE
+
+      </h2>
+      <p>
+        Si le locataire reste en possession de la maison avec l’assentiment du propriétaire après l’expiration de
+        la durée du présent bail, un nouveau bail est fait de mois en mois, qui est soumis à toutes les
+        conditions du présent bail, mais peut être résiliable à trente (30) jours par l'une ou l'autre des parties ou
+        moyennant un préavis plus long si la loi l'exige. Si le locataire reste en place sans le consentement du
+        propriétaire le propriétaire a le droit de bénéficier d'un loyer double, calculé au prorata de chaque jour
+        du report, jusqu'à ce que le locataire quitte la maison.
+
+      </p>
+      <h2>
+        11. CESSION DE LOCAUX
+      </h2>
+      <p>
+        À l'expiration du bail, le locataire doit quitter et rendre la maison dans le même état qu'au début du
+        présent bail, usure raisonnable et dommages causés par les éléments exceptés.
+
+      </p>
+      <h2>
+        12. CONFISCATION DU DÉPÔT DE SÉCURITÉ - DÉFAUT
+      </h2>
+      <p>
+        Il est entendu et convenu que le Locataire n’essaiera pas d’utiliser ou de déduire une partie de la
+        caution pour le paiement du dernier mois de loyer, ni essaiera d’utiliser en lieu et place du paiement
+        du loyer à aucun moment. Si le Locataire ne se conforme pas, ce dépôt de garantie sera confisqué et le
+        Propriétaire pourra récupérer le loyer dû comme si un tel dépôt n'avait pas été appliqué ou déduit du
+        loyer dû.
+        Dans le présent paragraphe, il est présumé que le Locataire quittant les lieux tout en restant redevable
+        du loyer et essaie de récupérer la caution. En outre, tout dépôt de caution doit constituer une garantie
+        que le locataire exécutera les obligations du bail et sera déchu par le propriétaire au cas où le locataire
+        enfreindrait l'une des conditions du présent bail. En cas de non-respect, par le locataire, de toute
+        obligation prévue dans le présent bail qui ne soit pas résolue par le locataire dans un délai de quinze
+        (15) jours à compter du préavis du propriétaire, ce dernier peut, en plus de la confiscation du dépôt de
+        garantie, exercer un recours en justice.
+
+      </p>
+      <h2>
+        13. ABANDON
+      </h2>
+      <p>
+        Si, à quelque moment que ce soit pendant la durée du présent Bail, le Locataire abandonne la Maison
+        ou l'un de ses biens meubles se trouvant dans ou autour de la maison, le propriétaire jouit des droits
+        suivants:
+        Le propriétaire peut, au choix du propriétaire, entrer dans la maison par tout moyen, sans
+        engager sa responsabilité vis-à-vis du locataire, et relouer la maison pour la totalité ou une partie de la
+        période alors expirée. Il peut également percevoir et recouvrer tout loyer dû;
+        En outre, au choix du propriétaire, il peut tenir le locataire pour responsable de toute différence
+        entre le loyer qui aurait dû être payé en vertu du présent bail pendant le reste de la durée restant à
+        courir, si ce bail était resté en vigueur, et le loyer net pour cette période réalisé par Propriétaire par le
+        biais d'une telle relocation.
+        Le propriétaire peut également disposer des biens meubles abandonnés du locataire s'il le juge
+        approprié, sans engager sa responsabilité.
+        Le propriétaire a le droit de présumer que le locataire a abandonné la maison si le locataire
+        retire la quasi-totalité de ses meubles, et la maison est inoccupée pendant une période de deux (2)
+        semaines consécutives ou s'il serait raisonnable de penser, étant donné les circonstances, que le
+        locataire a abandonné la maison.
+
+      </p>
+      <h2>
+        14. SÉCURITÉ
+      </h2>
+      <p>
+        Le locataire reconnaît que le propriétaire ne fournit pas de système d'alarme ni de sécurité pour la
+        maison ou pour le locataire et qu’aucun système d'alarme ou service de sécurité, si fourni, ne garantit
+        être complet à tous égards ou de protéger le locataire de toute nuisance. Par la présente, le locataire
+        libère le propriétaire de toute perte, poursuite, réclamation, charge, dommage ou blessure résultant
+        d'une sécurité insuffisante ou d'une défaillance de la sécurité.
+
+      </p>
+      <h2>
+        15. DIVISIBILITÉ
+      </h2>
+      <p>
+        Si une ou plusieurs parties de ce bail sont jugées non exécutoires pour quelque raison que ce soit, le
+        reste du présent contrat restera en vigueur.
+
+      </p>
+      <h2>
+        16. ASSURANCE
+      </h2>
+      <p>
+        Le locataire reconnaît que le propriétaire ne fournira pas de d'assurance pour les biens du locataire et
+        ne sera en aucun cas responsable de la perte de ses biens, que ce soit par vol, incendie, cas de force
+        majeure ou autrement.
+      </p>
+      <h2>
+        17. EFFET CONTRAIGNANT
+      </h2>
+      <p>
+        Les conditions contenus dans ce bail s’appliquent aux les héritiers, représentants légaux et ayants
+        droit, et les lient.
+
+      </p>
+      <h2>
+        18. ACCORD COMPLET
+      </h2>
+      <p>
+        Ce bail constitue l'intégralité de l'accord entre les parties. Toute entente ou représentation antérieure de
+        quelque nature que ce soit, antérieure à la date du présent bail, est annulée et remplacée par le présent.
+        Ce bail ne peut être modifié que par un écrit signé par le propriétaire et le locataire.
+
+      </p>
+      <h2>
+        19. AVIS
+      </h2>
+      <p>
+        Tout avis requis ou autrement donné en vertu du présent bail doit être écrit; remis en main propre, par
+        courrier recommandé avec accusé de réception, à la Maison si adressé au Locataire et à l'adresse du
+        paiement du loyer si adressé au propriétaire.
+        Par la présente les deux parties sont d’accord de mettre en application ce Bail au jour et l’an écrits
+        ci-dessus.
+
+      </p>
+      <br>
+      <br>
+      <h2>
+        SIGNATURES
+      </h2>
+      <p>
+        Nom du Propriétaire : HNFS
+        <br><br><br><br>
+        Signature du Propriétaire :
+      </p>
+      <p>
+
+      </p><br><br><br><br>
+      <p>
+        Nom du Locataire : {{currentLocataire.nom + ' ' + currentLocataire.prenom}}
+        <br><br><br><br>
+        Signature du Locataire :
+      </p>
+    </div>
+  </div>
+  <div *ngIf="generated">
+    <div class="card">
+      <div class="card-title"> Upload bail</div>
+      <div class="card-body">
+        <div class="p-1">
+          <input type="file" (change)="onSelectedFile($event)">
+          <button class="btn btn-warning" (click)="onuUploadPhoto()">
+            upload
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+<br><br><br><br>
+<hr>

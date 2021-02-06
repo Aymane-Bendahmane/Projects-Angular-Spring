@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-title">
+    Caddies
+  </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <tr>
+        <th>Id</th>   <th>NAme</th>   <th>Quantity</th>    <th>Prix</th>
+      </tr>
+      <tr *ngFor="let p of caddyService.getCurrentCaddy().items.values()">
+        <td>{{p.product.id}}</td>
+        <td>{{p.product.name}}</td>
+        <td>{{p.quantity}}</td>
+        <td>{{p.price}}</td>
+      </tr>
+      <tr>
+        <td colspan="3">total</td>
+        <td>{{caddyService.getTotal()}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

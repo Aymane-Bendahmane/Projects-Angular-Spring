@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="card mt-5">
+    <div class="card card-header bg-info">
+      <h2>Update Products</h2>
+    </div>
+    <div class="card card-body">
+      <form #f="ngForm" (ngSubmit)="updateProduite(f.value)">
+        <div class="form-group">
+          <label>name</label>
+          <input type="text" class="form-control" name="name" [(ngModel)]="produit.name">
+        </div>
+        <div class="form-group">
+          <label>Prix</label>
+          <input type="text" name="prix" class="form-control" [(ngModel)]="produit.prix">
+        </div>
+        <div class="form-group">
+          <label>Categories</label>
+          <select class="form-control" name="categorie" ngModel [(ngModel)]="categories">
+            <option *ngFor="let c of categories['_embedded'].categories"
+                    [ngValue]="'http://localhost:9000/categories/'+c.id"
+                    [selected]="c.type === produit.categorie.type" >
+              {{c.type}}
+            </option>
+          </select>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
